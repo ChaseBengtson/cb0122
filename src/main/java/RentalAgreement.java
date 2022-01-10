@@ -1,5 +1,8 @@
 import java.time.LocalDate;
 
+/**
+ * Data structure for representing a Rental Agreement.
+ */
 public class RentalAgreement {
     private final Tool tool;
     private final int rentalDays;

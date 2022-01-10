@@ -6,11 +6,20 @@ import java.time.temporal.TemporalAccessor;
 import java.time.temporal.TemporalAdjusters;
 import java.time.temporal.TemporalQuery;
 
+/**
+ * A class for determining how many days between the checkout and due date of a {@link Tool} rental should be charged.
+ */
 public class ChargeDayCalculator implements TemporalQuery<Long> {
     private final LocalDate checkoutDate;
     private final boolean chargeWeekends;
     private final boolean chargeHolidays;
 
+    /**
+     * Constructor
+     * @param checkoutDate A {@link LocalDate} containing the date that the tool will be checked out on.
+     * @param chargeWeekends Whether or not weekend days will be charged.
+     * @param chargeHolidays Whether or not holidays will be charged.
+     */
     public ChargeDayCalculator(LocalDate checkoutDate, boolean chargeWeekends, boolean chargeHolidays){
         this.checkoutDate = checkoutDate;
         this.chargeWeekends = chargeWeekends;

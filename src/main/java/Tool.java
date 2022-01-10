@@ -1,3 +1,6 @@
+/**
+ * A data structure for representing a Tool within the rental application.
+ */
 public class Tool {
     private String toolCode;
     private ToolType toolType;
@@ -10,7 +13,7 @@ public class Tool {
     enum ToolType {
         LADDER("Ladder", 1.99f, true, true, false),
         CHAINSAW("Chainsaw", 1.49f, true, false, true),
-        JACHAMMER("Jackhammer", 2.99f, true, false, false);
+        JACKHAMMER("Jackhammer", 2.99f, true, false, false);
 
         private final String name;
         private final float dailyCharge;
@@ -69,21 +72,20 @@ public class Tool {
      * Builder inner class to be used for creating {@link Tool} objects.
      */
     public static class Builder {
-        private String toolCode;
+        private final String toolCode;
         private ToolType toolType;
         private String brand;
 
-        public Builder setToolCode (String toolCode) {
+        public Builder(String toolCode){
             this.toolCode = toolCode;
-            return this;
         }
 
-        public Builder setToolType (ToolType toolType) {
+        public Builder setToolType(ToolType toolType) {
             this.toolType = toolType;
             return this;
         }
 
-        public Builder setBrand (String brand) {
+        public Builder setBrand(String brand) {
             this.brand = brand;
             return this;
         }

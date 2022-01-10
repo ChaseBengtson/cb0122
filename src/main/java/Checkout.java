@@ -1,6 +1,6 @@
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,11 +21,13 @@ public class Checkout {
 
         System.out.println("Tool Rental Application loaded...");
 
+        //Collect user input
         Tool tool = collectTool(inventory);
         int rentalDays = collectRentalDays();
         int discountAmount = collectDiscountAmount();
-        Date checkoutDate = collectCheckoutDate();
+        LocalDate checkoutDate = collectCheckoutDate();
 
+        //Generate and print Rental Agreement
         RentalAgreement rentalAgreement = new RentalAgreement(tool, rentalDays, discountAmount, checkoutDate);
         rentalAgreement.printRentalAgreement();
     }
@@ -73,13 +75,13 @@ public class Checkout {
         return discountAmountNum;
     }
 
-    public static Date collectCheckoutDate(){
+    public static LocalDate collectCheckoutDate(){
         System.out.println("What is the date that the tool will be checked out on?  Please enter in mm/dd/yyyy format.");
         String enteredCheckoutDate = System.console().readLine();
-        Date checkoutDate = null;
+        LocalDate checkoutDate = null;
         try{
-            checkoutDate = new SimpleDateFormat("MM/dd/yyyy").parse(enteredCheckoutDate);
-        }catch(ParseException e){
+            checkoutDate = LocalDate.parse(enteredCheckoutDate, DateTimeFormatter.ofPattern("MM'/dd'/yyyy"));
+        }catch(DateTimeParseException e){
             System.out.println("The entered checkout date could not be parsed.  Please ensure the date is entered in 'mm/dd/yyyy' format.");
             e.printStackTrace();
             System.exit(1);

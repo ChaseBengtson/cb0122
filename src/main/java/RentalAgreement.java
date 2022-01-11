@@ -33,7 +33,7 @@ public class RentalAgreement {
         this.subTotal = BigDecimal.valueOf(chargeDays * tool.getToolType().getDailyCharge()).setScale(2, RoundingMode.HALF_UP).floatValue();
         this.discountPercent = discountPercent;
         this.discountAmount = BigDecimal.valueOf(subTotal * (discountPercent/100f)).setScale(2, RoundingMode.HALF_UP).floatValue();
-        this.finalCharge = subTotal - discountAmount;
+        this.finalCharge = BigDecimal.valueOf(subTotal - discountAmount).setScale(2, RoundingMode.HALF_UP).floatValue();
     }
 
     /**
@@ -57,7 +57,7 @@ public class RentalAgreement {
         System.out.println("Due Date: " + dueDate.format(DateTimeFormatter.ofPattern("M/d/yy")));
         System.out.println("Daily Rental Charge: $" + tool.getToolType().getDailyCharge());
         System.out.println("Charge Days: " + chargeDays);
-        System.out.println("Pre-Discount Charge: " + subTotal);
+        System.out.println("Pre-Discount Charge: $" + subTotal);
         System.out.println("Discount Percent: " + discountPercent + "%");
         System.out.println("Discount Amount: $" + discountAmount);
         System.out.println("Final Charge: $" + finalCharge);

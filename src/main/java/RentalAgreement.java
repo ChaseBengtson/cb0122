@@ -55,12 +55,12 @@ public class RentalAgreement {
         System.out.println("Rental Days: " + rentalDays);
         System.out.println("Checkout Date: " + checkoutDate.format(DateTimeFormatter.ofPattern("M/d/yy")));
         System.out.println("Due Date: " + dueDate.format(DateTimeFormatter.ofPattern("M/d/yy")));
-        System.out.println("Daily Rental Charge: $" + tool.getToolType().getDailyCharge());
+        System.out.println("Daily Rental Charge: $" + String.format("%.02f", tool.getToolType().getDailyCharge()));
         System.out.println("Charge Days: " + chargeDays);
-        System.out.println("Pre-Discount Charge: $" + subTotal);
+        System.out.println("Pre-Discount Charge: $" + String.format("%.02f", subTotal));
         System.out.println("Discount Percent: " + discountPercent + "%");
-        System.out.println("Discount Amount: $" + discountAmount);
-        System.out.println("Final Charge: $" + finalCharge);
+        System.out.println("Discount Amount: $" + String.format("%.02f", discountAmount));
+        System.out.println("Final Charge: $" + String.format("%.02f", finalCharge));
     }
 
     public Tool getTool () {

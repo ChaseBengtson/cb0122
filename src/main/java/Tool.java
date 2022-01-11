@@ -2,9 +2,9 @@
  * A data structure for representing a Tool within the rental application.
  */
 public class Tool {
-    private String toolCode;
-    private ToolType toolType;
-    private String brand;
+    private final String toolCode;
+    private final ToolType toolType;
+    private final String brand;
 
     /**
      * An enum for describing the different types of tools available for rent.  Includes name, price to rent daily, and
@@ -22,9 +22,6 @@ public class Tool {
         private final boolean isChargedHoliday;
         public String getName() {return name;}
         public float getDailyCharge() {return dailyCharge;}
-        public boolean isChargedWeekday () {return isChargedWeekday;}
-        public boolean isChargedWeekend () {return isChargedWeekend;}
-        public boolean isChargedHoliday () {return isChargedHoliday;}
         ToolType(String name, float dailyCharge, boolean isChargedWeekday, boolean isChargedWeekend, boolean isChargedHoliday){
             this.name = name;
             this.dailyCharge = dailyCharge;
@@ -49,7 +46,7 @@ public class Tool {
     }
 
     public boolean isChargedWeekend(){
-        return this.toolType.isChargedWeekday;
+        return this.toolType.isChargedWeekend;
     }
 
     public boolean isChargedHoliday(){

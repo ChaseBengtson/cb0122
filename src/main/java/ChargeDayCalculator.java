@@ -8,6 +8,8 @@ import java.time.temporal.TemporalQuery;
 
 /**
  * A class for determining how many days between the checkout and due date of a {@link Tool} rental should be charged.
+ * This class makes the assumption that both the checkout and due date will be in the same year for simplicity's sake, as there
+ * is no mention of valid date range within the specifications document.
  */
 public class ChargeDayCalculator implements TemporalQuery<Long> {
     private final LocalDate checkoutDate;
@@ -61,10 +63,12 @@ public class ChargeDayCalculator implements TemporalQuery<Long> {
                     if(daysToIndpDay > 0){
                         chargeDays++;
                     }
+                    break;
                 case SUNDAY:
                     if(daysFromIndpDay > 0){
                         chargeDays++;
                     }
+                    break;
                 default:
                     chargeDays++;
             }
@@ -96,8 +100,10 @@ public class ChargeDayCalculator implements TemporalQuery<Long> {
     private int countWeekendsNotCharged(LocalDate dueDate){
         int chargeDays = 0;
         //Determine if checkout is on sat.  If not, subtract 1
-        if(!checkoutDate.getDayOfWeek().equals(DayOfWeek.SATURDAY)){
+        if(checkoutDate.getDayOfWeek().equals(DayOfWeek.SATURDAY)){
             chargeDays++;
+        }else{
+            chargeDays += 2;
         }
 
         //Count weeks between first sun and due day and subtract 2 for each week
@@ -109,7 +115,7 @@ public class ChargeDayCalculator implements TemporalQuery<Long> {
         LocalDate dateAfterWeeks = firstSundayAfterCheckout.plusWeeks(weeksBetween);
         LocalDate nextSaturday = dateAfterWeeks.with(TemporalAdjusters.next(DayOfWeek.SATURDAY));
         if(nextSaturday.isBefore(dueDate) || nextSaturday.isEqual(dueDate)){
-            chargeDays--;
+            chargeDays++;
         }
         return chargeDays;
     }

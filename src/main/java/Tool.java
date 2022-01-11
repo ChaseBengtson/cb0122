@@ -17,7 +17,7 @@ public class Tool {
 
         private final String name;
         private final float dailyCharge;
-        private final boolean isChargedWeekday;
+        private final boolean isChargedWeekday; //This value is included but never used, as all example tools charge on weekdays
         private final boolean isChargedWeekend;
         private final boolean isChargedHoliday;
         public String getName() {return name;}
